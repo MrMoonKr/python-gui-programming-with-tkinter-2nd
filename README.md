@@ -29,6 +29,10 @@
 
 ## 의존 패키지
 
+**tkinter 패키지는 내장되어 있어 설치가 불필요합니다.**
+
+---
+
 ```
 $ (.venv) pip install ipykernel numpy matplotlib scipy
 ```
