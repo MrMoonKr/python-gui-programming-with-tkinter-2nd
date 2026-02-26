@@ -1,3 +1,10 @@
+'''
+    https://store.steampowered.com/app/224600/Defiance/
+    https://store.steampowered.com/app/743090/Defiance_2050/
+    https://www.reddit.com/r/Defiance/comments/111pkvj/defiance_game_files_unpacked_sounds_textures_and/
+    https://www.mediafire.com/folder/y8dfcdqbc7vvh/Defiance_Game_Directories_Folder
+    '''
+
 import os
 import struct
 import threading
@@ -176,28 +183,32 @@ class WadBrowserApp(tk.Tk):
 
         # Left: WAD list
         left = ttk.Frame(paned)
+        left.grid_rowconfigure(1, weight=1)
+        left.grid_columnconfigure(0, weight=1)
         paned.add(left, weight=1)
 
-        ttk.Label(left, text="WAD Files").pack(side=tk.TOP, anchor="w")
+        ttk.Label(left, text="WAD Files").grid(row=0, column=0, sticky="w")
 
         self.tree_wads = ttk.Treeview(left, columns=("path", "records"), show="headings", height=20)
         self.tree_wads.heading("path", text="Path")
         self.tree_wads.heading("records", text="#Records")
         self.tree_wads.column("path", width=520, anchor="w")
         self.tree_wads.column("records", width=80, anchor="e")
-        self.tree_wads.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.tree_wads.grid(row=1, column=0, sticky="nsew")
 
         yscroll_wads = ttk.Scrollbar(left, orient=tk.VERTICAL, command=self.tree_wads.yview)
         self.tree_wads.configure(yscrollcommand=yscroll_wads.set)
-        yscroll_wads.pack(side=tk.RIGHT, fill=tk.Y)
+        yscroll_wads.grid(row=1, column=1, sticky="ns")
 
         self.tree_wads.bind("<<TreeviewSelect>>", self.on_select_wad)
 
         # Right: Records
         right = ttk.Frame(paned)
+        right.grid_rowconfigure(1, weight=1)
+        right.grid_columnconfigure(0, weight=1)
         paned.add(right, weight=3)
 
-        ttk.Label(right, text="Records").pack(side=tk.TOP, anchor="w")
+        ttk.Label(right, text="Records").grid(row=0, column=0, sticky="w")
 
         cols = ("id", "type", "size", "mtime", "name")
         self.tree_rec = ttk.Treeview(right, columns=cols, show="headings")
@@ -213,11 +224,11 @@ class WadBrowserApp(tk.Tk):
         self.tree_rec.column("mtime", width=220, anchor="w")
         self.tree_rec.column("name", width=420, anchor="w")
 
-        self.tree_rec.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.tree_rec.grid(row=1, column=0, sticky="nsew")
 
         yscroll_rec = ttk.Scrollbar(right, orient=tk.VERTICAL, command=self.tree_rec.yview)
         self.tree_rec.configure(yscrollcommand=yscroll_rec.set)
-        yscroll_rec.pack(side=tk.RIGHT, fill=tk.Y)
+        yscroll_rec.grid(row=1, column=1, sticky="ns")
 
         self.tree_rec.bind("<Double-1>", lambda e: self._double_click_record())
 

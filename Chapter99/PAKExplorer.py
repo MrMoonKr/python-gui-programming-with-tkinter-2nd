@@ -115,15 +115,19 @@ class PAKExplorer(tk.Tk):
 
         # left: tree frame + scrollbar
         self.left_frame = ttk.Frame(self.paned, padding=4)
+        self.left_frame.grid_rowconfigure(0, weight=1)
+        self.left_frame.grid_columnconfigure(0, weight=1)
         self.tree = ttk.Treeview(self.left_frame, show="tree")
         self.tree_scroll = ttk.Scrollbar(self.left_frame, orient=tk.VERTICAL, command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.tree_scroll.set)
 
-        self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        self.tree_scroll.pack(side=tk.RIGHT, fill=tk.Y)
+        self.tree.grid(row=0, column=0, sticky="nsew")
+        self.tree_scroll.grid(row=0, column=1, sticky="ns")
 
         # right: list frame (Treeview with columns) + scrollbars
         self.right_frame = ttk.Frame(self.paned, padding=4)
+        self.right_frame.grid_rowconfigure(0, weight=1)
+        self.right_frame.grid_columnconfigure(0, weight=1)
 
         columns = ("name", "type", "size", "attributes")
         self.listview = ttk.Treeview(
@@ -148,9 +152,9 @@ class PAKExplorer(tk.Tk):
         self.list_scroll_x = ttk.Scrollbar(self.right_frame, orient=tk.HORIZONTAL, command=self.listview.xview)
         self.listview.configure(yscrollcommand=self.list_scroll_y.set, xscrollcommand=self.list_scroll_x.set)
 
-        self.listview.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-        self.list_scroll_y.pack(side=tk.RIGHT, fill=tk.Y)
-        self.list_scroll_x.pack(side=tk.BOTTOM, fill=tk.X)
+        self.listview.grid(row=0, column=0, sticky="nsew")
+        self.list_scroll_y.grid(row=0, column=1, sticky="ns")
+        self.list_scroll_x.grid(row=1, column=0, sticky="ew")
 
         # add panes with initial relative sizes
         self.paned.add(self.left_frame, weight=1)   # left narrower
