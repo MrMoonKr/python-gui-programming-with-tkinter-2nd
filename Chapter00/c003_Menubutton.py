@@ -12,11 +12,11 @@ class App(tk.Tk):
         self.center_window(800, 600)
 
         self.style = ttk.Style(self)
-        #self._init_menubar()
-        self._init_menu()
-        self._init_body()
+        #self._build_menubar()
+        self._build_menu()
+        self._build_body()
         
-    def _init_menubar(self):
+    def _build_menubar(self):
         menubar = tk.Menu(self)
         self.config(menu=menubar)
 
@@ -51,7 +51,7 @@ class App(tk.Tk):
         help_menu.add_command(label="About", command=self.show_about)
         menubar.add_cascade(label="Help", menu=help_menu)
 
-    def _init_menu(self):
+    def _build_menu(self):
         menu_bar = ttk.Frame(self, padding=(8, 6))
         menu_bar.pack(side=tk.TOP, fill=tk.X)
 
@@ -86,7 +86,7 @@ class App(tk.Tk):
         help_menu.add_command(label="About", command=self.show_about)
         self.add_menu_button(menu_bar, "Help", help_menu)
 
-    def _init_body(self):
+    def _build_body(self):
         container = ttk.Frame(self, padding=16)
         container.pack(fill=tk.BOTH, expand=True)
 

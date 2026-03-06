@@ -12,9 +12,9 @@ class App(tk.Tk):
         self.center_window(800, 600)
 
         self.style = ttk.Style(self)
-        self._init_menubar()
+        self._build_menubar()
 
-    def _init_menubar(self):
+    def _build_menubar(self):
         menubar = tk.Menu(self)
         self.config(menu=menubar)
 
